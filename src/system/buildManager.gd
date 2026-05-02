@@ -67,5 +67,7 @@ func place_building(position: Vector2):
 	temp_build_instance.queue_free()
 	temp_build_instance = null
 	
+	building.appliesEffect()
+	
 	is_placing = false
 	selected_building_scene = null

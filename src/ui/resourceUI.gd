@@ -3,8 +3,12 @@ extends Node
 
 @onready var icon = $HBoxContainer/Icon
 @onready var label = $HBoxContainer/Label
-var resourceType : String
 
+@onready var soldier = $HBoxContainer/HBoxTroops/Soldier
+@onready var separator = $HBoxContainer/HBoxTroops/Separator
+@onready var soldierCapacity = $HBoxContainer/HBoxTroops/SoldierCapacity
+
+var resourceType : String
 
 func setup(type: String):
 	await ready
@@ -22,9 +26,21 @@ func setup(type: String):
 		"fuel":
 			label.text = str(GameState.resources.fuel)
 			icon.texture = preload("res://assets/icon/metal.png")
+		"troops":
+			soldier.text = str(GameState.resources.soldier)
+			separator.text = "/"
+			soldierCapacity.text = str(GameState.resources.soldierCapacity)
+			icon.texture = preload("res://assets/icon/troops.png")
 
-func update_value(value:int):
-	label.text = str(value)
+
+func update_value(value:int, key: String):
+	if key == "label":
+		label.text = str(value)
+	elif key == "soldier":
+		soldier.text = str(value)
+	elif key == "soldierCapacity":
+		soldierCapacity.text = str(value)
+		print("changing soldier capacity")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

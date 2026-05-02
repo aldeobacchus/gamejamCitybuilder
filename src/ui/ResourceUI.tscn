@@ -22,3 +22,15 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="HBoxContainer" unique_id=1047932627]
 layout_mode = 2
+
+[node name="HBoxTroops" type="HBoxContainer" parent="HBoxContainer" unique_id=1043768260]
+layout_mode = 2
+
+[node name="Soldier" type="Label" parent="HBoxContainer/HBoxTroops" unique_id=1561093792]
+layout_mode = 2
+
+[node name="Separator" type="Label" parent="HBoxContainer/HBoxTroops" unique_id=1134165728]
+layout_mode = 2
+
+[node name="SoldierCapacity" type="Label" parent="HBoxContainer/HBoxTroops" unique_id=379788317]
+layout_mode = 2

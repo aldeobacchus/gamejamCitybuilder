@@ -19,4 +19,4 @@ func _process(delta: float) -> void:
 	pass
 
 func appliesEffect() -> void:
-	pass
+	GameState.addResource("soldierCapacity", 5)

@@ -37,6 +37,7 @@ func _ready() -> void:
 	createResource("organic")
 	createResource("plasma")
 	createResource("fuel")
+	createResource("troops")
 	
 	#DEBUG UI
 	var popup = dMenuButton.get_popup()
@@ -72,12 +73,15 @@ func _on_hide_expedition():
 
 #update UI
 func update_resources():
-	print("signal callback, resource updating")
 	for type in resourceDict:
-		var value = GameState.getResourceValue(type)
-		resourceDict[type].update_value(value)
-
-
+		if type == "troops":
+			var soldier = GameState.getResourceValue("soldier")
+			var soldierCapacity = GameState.getResourceValue("soldierCapacity")
+			resourceDict[type].update_value(soldier, "soldier")
+			resourceDict[type].update_value(soldierCapacity, "soldierCapacity")
+		else:
+			var value = GameState.getResourceValue(type)
+			resourceDict[type].update_value(value, "label")
 
 #debug
 func _dOnResSelected(id):
