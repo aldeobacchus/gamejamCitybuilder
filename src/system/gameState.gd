@@ -11,6 +11,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
+#adding resources to game state
 func addRessource(type:String, amount:int):
 	match type:
 		"metal":
