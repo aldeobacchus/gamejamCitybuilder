@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://uxsqkjejd0vh"]
+
+[ext_resource type="Texture2D" uid="uid://caxpouc80i0t8" path="res://assets/buildings/spatalPort.png" id="1_y8nkm"]
+
+[node name="SpatialPort" type="Node2D" unique_id=213105773]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1014860661]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_y8nkm")

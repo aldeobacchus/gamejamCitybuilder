@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://d0rrkmodpmyj0"]
+
+[ext_resource type="Script" uid="uid://cbiu4sbqferw3" path="res://src/main/main.gd" id="1_k2fmo"]
+[ext_resource type="PackedScene" uid="uid://ct7koco0as1wb" path="res://src/entities/buildings/MainBuilding.tscn" id="3_6q06x"]
+[ext_resource type="PackedScene" uid="uid://bt1vriigvn8jn" path="res://src/ui/GUI.tscn" id="3_l3cfh"]
+[ext_resource type="Script" uid="uid://6opnoh1c2wuc" path="res://src/system/buildManager.gd" id="5_ow5a4"]
+
+[sub_resource type="TileSet" id="TileSet_0wfyh"]
+tile_shape = 1
+tile_size = Vector2i(256, 128)
+
+[node name="Main" type="Node2D" unique_id=403358633]
+script = ExtResource("1_k2fmo")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=849016846]
+
+[node name="GUI" parent="CanvasLayer" unique_id=782448645 instance=ExtResource("3_l3cfh")]
+
+[node name="World" type="Node2D" parent="." unique_id=1759400283]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="World" unique_id=1137719171]
+position = Vector2(0, -3)
+tile_set = SubResource("TileSet_0wfyh")
+
+[node name="Buildings" type="Node2D" parent="World" unique_id=774979377]
+scale = Vector2(0.5, 0.5)
+
+[node name="MainBuilding" parent="World/Buildings" unique_id=1860023803 instance=ExtResource("3_6q06x")]
+position = Vector2(1020, 634)
+
+[node name="BuildManager" type="Node" parent="World" unique_id=1069717946]
+script = ExtResource("5_ow5a4")
