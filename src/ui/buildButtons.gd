@@ -3,10 +3,17 @@ extends Button
 signal building_selected(building_scene)
 
 @export var building_scene: PackedScene
+var cost := {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	var temp = building_scene.instantiate()
+	
+	cost = temp.cost
+	temp.queue_free()
+	
+	GameState.resourcesChanged.connect(updatePayState)
+	updatePayState()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -15,3 +22,13 @@ func _process(delta: float) -> void:
 
 func _pressed() -> void:
 	emit_signal("building_selected", building_scene)
+	
+#update state
+func updatePayState():
+	if GameState.canAfford(cost):
+		disabled = false
+		modulate = Color(1, 1, 1, 1)   # normal
+	else:
+		disabled = true
+		modulate = Color(0.5, 0.5, 0.5, 1)   # grisé
+	

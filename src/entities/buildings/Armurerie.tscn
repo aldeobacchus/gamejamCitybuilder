@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://cce425kwnuks2"]
 
+[ext_resource type="Script" uid="uid://dtsymo7q182pt" path="res://src/entities/buildings/armurerie.gd" id="1_c1p74"]
 [ext_resource type="Texture2D" uid="uid://citip8gc0apap" path="res://assets/buildings/armurerie.png" id="1_g8li0"]
 
 [node name="Armurerie" type="Node2D" unique_id=964260367]
+script = ExtResource("1_c1p74")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=163849346]
 scale = Vector2(0.5, 0.5)

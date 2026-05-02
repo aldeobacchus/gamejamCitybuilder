@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://ce04lbpe3t8l8"]
+
+[ext_resource type="Script" uid="uid://c0opwgfk3mbos" path="res://src/entities/buildings/barracks.gd" id="1_n42ou"]
+[ext_resource type="Texture2D" uid="uid://c8po66s0b5ncx" path="res://assets/buildings/barracks.png" id="2_e32vk"]
+
+[node name="Entrepot" type="Node2D" unique_id=1018907467]
+script = ExtResource("1_n42ou")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=691961277]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_e32vk")

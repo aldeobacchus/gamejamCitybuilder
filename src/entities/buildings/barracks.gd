@@ -1,9 +1,22 @@
 extends Node2D
 
+@export var buildingName: String = "Barracks"
+
+var cost := {
+	"metal": 500,
+	"organic": 0,
+	"plasma": 0,
+	"fuel": 0
+}
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	pass # Replace with function body.
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	pass
+
+func appliesEffect() -> void:
 	pass

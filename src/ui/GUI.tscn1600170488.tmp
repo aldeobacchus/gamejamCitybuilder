@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://bt1vriigvn8jn"]
+
+[ext_resource type="Script" uid="uid://u123ngoogah4" path="res://src/ui/buildButtons.gd" id="1_1r1fh"]
+[ext_resource type="Script" uid="uid://j1gfy1agl3ar" path="res://src/ui/gui.gd" id="1_sy1ho"]
+[ext_resource type="PackedScene" uid="uid://uxsqkjejd0vh" path="res://src/entities/buildings/SpatialPort.tscn" id="2_sy1ho"]
+[ext_resource type="PackedScene" uid="uid://ce04lbpe3t8l8" path="res://src/entities/buildings/Entrepot.tscn" id="3_40ujj"]
+[ext_resource type="PackedScene" uid="uid://cce425kwnuks2" path="res://src/entities/buildings/Armurerie.tscn" id="4_bu0gq"]
+[ext_resource type="Script" uid="uid://dg6oemd0sylaw" path="res://src/ui/expeditionButton.gd" id="6_40ujj"]
+[ext_resource type="Script" uid="uid://dk4nx0imq2ybw" path="res://src/ui/hideExpedition.gd" id="7_bu0gq"]
+
+[node name="Control" type="Control" unique_id=782448645]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sy1ho")
+
+[node name="BuildingsTab" type="Control" parent="." unique_id=955478603]
+anchors_preset = 0
+offset_left = 200.0
+offset_top = 550.0
+offset_right = 240.0
+offset_bottom = 590.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BuildingsTab" unique_id=386421781]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SpatialPort" type="Button" parent="BuildingsTab/HBoxContainer" unique_id=2014083297 groups=["build_buttons"]]
+layout_mode = 2
+text = "Spatial Port"
+script = ExtResource("1_1r1fh")
+building_scene = ExtResource("2_sy1ho")
+
+[node name="Entrepot" type="Button" parent="BuildingsTab/HBoxContainer" unique_id=1383064812 groups=["build_buttons"]]
+layout_mode = 2
+text = "Entrepot"
+script = ExtResource("1_1r1fh")
+building_scene = ExtResource("3_40ujj")
+
+[node name="Armurerie" type="Button" parent="BuildingsTab/HBoxContainer" unique_id=1496003378 groups=["build_buttons"]]
+layout_mode = 2
+text = "Armurerie"
+script = ExtResource("1_1r1fh")
+building_scene = ExtResource("4_bu0gq")
+
+[node name="ExpeditionTab" type="Control" parent="." unique_id=965628691]
+anchors_preset = 0
+offset_left = 584.0
+offset_top = 50.0
+offset_right = 1100.0
+offset_bottom = 600.0
+
+[node name="ExpeditionButton" type="Button" parent="ExpeditionTab" unique_id=1408823780]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 500.0
+offset_right = 348.0
+offset_bottom = 531.0
+text = "Expeditions"
+script = ExtResource("6_40ujj")
+
+[node name="HideExpedition" type="Button" parent="ExpeditionTab" unique_id=538650103]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 9.0
+offset_right = 26.0
+offset_bottom = 31.0
+grow_horizontal = 0
+text = "x"
+script = ExtResource("7_bu0gq")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ExpeditionTab" unique_id=1771158797]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="ExpeditionsList" type="VBoxContainer" parent="ExpeditionTab/ScrollContainer" unique_id=523875527]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="ResourcesTab" type="Control" parent="." unique_id=1970677066]
+anchors_preset = 0
+offset_left = 50.0
+offset_top = 25.0
+offset_right = 850.0
+offset_bottom = 65.0
+
+[node name="Metal" type="HBoxContainer" parent="ResourcesTab" unique_id=12074808]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="ResourcesTab/Metal" unique_id=960038333]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ResourcesTab/Metal" unique_id=1970752014]
+layout_mode = 2

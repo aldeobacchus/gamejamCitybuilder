@@ -15,6 +15,10 @@ run/main_scene="uid://d0rrkmodpmyj0"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameState="*uid://bdxomfxaymovd"
+
 [global_group]
 
 build_buttons=""

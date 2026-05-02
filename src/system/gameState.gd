@@ -1,41 +1,48 @@
 extends Node
+#const
+const METAL = "metal"
+const ORGANIC = "organic"
+const PLASMA = "plasma"
+const FUEL = "fuel"
 
+#resources
+signal resourcesChanged()
 var resources := ResourceData.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
-#adding resources to game state
-func addRessource(type:String, amount:int):
-	match type:
-		"metal":
-			resources.metal += amount
-		"organic":
-			resources.organic += amount
-		"plasma":
-			resources.plasma += amount
-		"fuel":
-			resources.fuel += amount
-		"soldierCapacity":
-			resources.soldierCapacity += amount
-		"soldier":
-			resources.soldier += amount
+#Get resource value
+func getResourceValue(type:String):
+	return resources.get(type)
 
+func getCost(type:String) -> Dictionary:
+	return resources.get(type)
+
+#adding resources to game state
+func addResource(type:String, amount:int):
+	var current = resources.get(type)
+	resources.set(type, current + amount)
+	emit_signal("resourcesChanged")
+
+#removing resources to game state
 func removeResource(type:String, amount:int):
-	match type:
-		"metal":
-			resources.metal = max((resources.metal - amount), 0)
-		"organic":
-			resources.organic = max((resources.organic - amount), 0)
-		"plasma":
-			resources.plasma = max((resources.plasma - amount), 0)
-		"fuel":
-			resources.fuel = max((resources.fuel - amount), 0)
-		"soldier":
-			resources.soldier = max((resources.soldier - amount), 0)
+	var current = resources.get(type)
+	resources.set(type, max((current - amount), 0))
+	emit_signal("resourcesChanged")
+
+#generic function to check if we can afford a building
+func canAfford(cost: Dictionary) -> bool:
+	for type in cost.keys():
+		if getResourceValue(type) < cost[type]:
+			return false
+	return true
+
+func pay(cost: Dictionary):
+	for type in cost.keys():
+		removeResource(type, cost[type])

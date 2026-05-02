@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://3g8vmlvgwwv3"]
+
+[ext_resource type="Script" uid="uid://b187de8m6lw7" path="res://src/ui/resourceUI.gd" id="1_k5hmc"]
+
+[node name="RessourceUI" type="Control" unique_id=1780252965]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_k5hmc")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1785850880]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer" unique_id=32206302]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=1047932627]
+layout_mode = 2

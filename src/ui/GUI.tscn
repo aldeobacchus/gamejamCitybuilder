@@ -1,12 +1,22 @@
 [gd_scene format=3 uid="uid://bt1vriigvn8jn"]
 
-[ext_resource type="Script" uid="uid://u123ngoogah4" path="res://scripts/ui/buildButtons.gd" id="1_1r1fh"]
-[ext_resource type="Script" uid="uid://j1gfy1agl3ar" path="res://scripts/ui/gui.gd" id="1_sy1ho"]
-[ext_resource type="PackedScene" uid="uid://uxsqkjejd0vh" path="res://scenes/entities/buildings/SpatialPort.tscn" id="2_sy1ho"]
-[ext_resource type="PackedScene" uid="uid://ce04lbpe3t8l8" path="res://scenes/entities/buildings/Entrepot.tscn" id="3_40ujj"]
-[ext_resource type="PackedScene" uid="uid://cce425kwnuks2" path="res://scenes/entities/buildings/Armurerie.tscn" id="4_bu0gq"]
-[ext_resource type="Script" uid="uid://dg6oemd0sylaw" path="res://scripts/ui/expeditionButton.gd" id="6_40ujj"]
-[ext_resource type="Script" uid="uid://dk4nx0imq2ybw" path="res://scripts/ui/hideExpedition.gd" id="7_bu0gq"]
+[ext_resource type="Script" uid="uid://u123ngoogah4" path="res://src/ui/buildButtons.gd" id="1_1r1fh"]
+[ext_resource type="Script" uid="uid://j1gfy1agl3ar" path="res://src/ui/gui.gd" id="1_sy1ho"]
+[ext_resource type="PackedScene" uid="uid://uxsqkjejd0vh" path="res://src/entities/buildings/SpatialPort.tscn" id="2_sy1ho"]
+[ext_resource type="PackedScene" uid="uid://ce04lbpe3t8l8" path="res://src/entities/buildings/Barracks.tscn" id="3_40ujj"]
+[ext_resource type="PackedScene" uid="uid://cce425kwnuks2" path="res://src/entities/buildings/Armurerie.tscn" id="4_bu0gq"]
+[ext_resource type="Script" uid="uid://dj7tnlaa5b68q" path="res://src/ui/batLabel.gd" id="4_k3gx0"]
+[ext_resource type="Script" uid="uid://dg6oemd0sylaw" path="res://src/ui/expeditionButton.gd" id="6_40ujj"]
+[ext_resource type="Script" uid="uid://dk4nx0imq2ybw" path="res://src/ui/hideExpedition.gd" id="7_bu0gq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_k3gx0"]
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_3y2ti"]
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_apyvs"]
+font_size = 12
 
 [node name="Control" type="Control" unique_id=782448645]
 layout_mode = 3
@@ -29,23 +39,47 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="SpatialPort" type="Button" parent="BuildingsTab/HBoxContainer" unique_id=2014083297 groups=["build_buttons"]]
+[node name="SpatialPortContainer" type="VBoxContainer" parent="BuildingsTab/HBoxContainer" unique_id=2141623117]
+layout_mode = 2
+
+[node name="SpatialPort" type="Button" parent="BuildingsTab/HBoxContainer/SpatialPortContainer" unique_id=2014083297 groups=["build_buttons"]]
 layout_mode = 2
 text = "Spatial Port"
 script = ExtResource("1_1r1fh")
 building_scene = ExtResource("2_sy1ho")
 
-[node name="Entrepot" type="Button" parent="BuildingsTab/HBoxContainer" unique_id=1383064812 groups=["build_buttons"]]
+[node name="SPCost" type="Label" parent="BuildingsTab/HBoxContainer/SpatialPortContainer" unique_id=661966171]
 layout_mode = 2
-text = "Entrepot"
-script = ExtResource("1_1r1fh")
-building_scene = ExtResource("3_40ujj")
+label_settings = SubResource("LabelSettings_k3gx0")
+script = ExtResource("4_k3gx0")
 
-[node name="Armurerie" type="Button" parent="BuildingsTab/HBoxContainer" unique_id=1496003378 groups=["build_buttons"]]
+[node name="ArmureriePortContainer2" type="VBoxContainer" parent="BuildingsTab/HBoxContainer" unique_id=1166780577]
+layout_mode = 2
+
+[node name="Armurerie" type="Button" parent="BuildingsTab/HBoxContainer/ArmureriePortContainer2" unique_id=1496003378 groups=["build_buttons"]]
 layout_mode = 2
 text = "Armurerie"
 script = ExtResource("1_1r1fh")
 building_scene = ExtResource("4_bu0gq")
+
+[node name="Acost" type="Label" parent="BuildingsTab/HBoxContainer/ArmureriePortContainer2" unique_id=1817367010]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_3y2ti")
+script = ExtResource("4_k3gx0")
+
+[node name="BarracksContainer" type="VBoxContainer" parent="BuildingsTab/HBoxContainer" unique_id=1860162694]
+layout_mode = 2
+
+[node name="Barracks" type="Button" parent="BuildingsTab/HBoxContainer/BarracksContainer" unique_id=1383064812 groups=["build_buttons"]]
+layout_mode = 2
+text = "Barracks"
+script = ExtResource("1_1r1fh")
+building_scene = ExtResource("3_40ujj")
+
+[node name="BCost" type="Label" parent="BuildingsTab/HBoxContainer/BarracksContainer" unique_id=1821556785]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_apyvs")
+script = ExtResource("4_k3gx0")
 
 [node name="ExpeditionTab" type="Control" parent="." unique_id=965628691]
 anchors_preset = 0
@@ -91,3 +125,51 @@ clip_contents = true
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 10
+
+[node name="ResourcesTab" type="Control" parent="." unique_id=1970677066]
+anchors_preset = 0
+offset_left = 77.0
+offset_top = 25.0
+offset_right = 850.0
+offset_bottom = 65.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ResourcesTab" unique_id=635732948]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 40
+
+[node name="DebugUI" type="Control" parent="." unique_id=373687633]
+anchors_preset = 0
+offset_left = 22.0
+offset_top = 442.0
+offset_right = 62.0
+offset_bottom = 482.0
+
+[node name="MenuButton" type="MenuButton" parent="DebugUI" unique_id=726885962]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Ressource"
+
+[node name="Add" type="Button" parent="DebugUI" unique_id=402596962]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 54.0
+offset_right = 91.0
+offset_bottom = 85.0
+text = "+ 100"
+
+[node name="Remove" type="Button" parent="DebugUI" unique_id=170325147]
+layout_mode = 0
+offset_left = -2.0
+offset_top = 55.0
+offset_right = 34.0
+offset_bottom = 86.0
+text = "- 100"
+
+[connection signal="pressed" from="DebugUI/Add" to="." method="_dOnAddTen"]
+[connection signal="pressed" from="DebugUI/Remove" to="." method="_dOnRemoveTen"]

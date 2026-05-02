@@ -1,9 +1,0 @@
-[gd_scene format=3 uid="uid://ce04lbpe3t8l8"]
-
-[ext_resource type="Texture2D" uid="uid://bn1auvq8l5vlu" path="res://assets/buildings/entrepot.png" id="1_di72i"]
-
-[node name="Entrepot" type="Node2D" unique_id=1018907467]
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=691961277]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_di72i")
