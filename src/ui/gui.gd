@@ -5,6 +5,7 @@ extends Control
 @onready var expeditionButton = $ExpeditionTab/ExpeditionButton
 @onready var hideExpedition = $ExpeditionTab/HideExpedition
 var planetItemScene = preload("res://src/ui/PlanetItem.tscn")
+var planetMissionScene = preload("res://src/ui/PlanetMission.tscn")
 
 #RESOURCES
 @onready var hboxRes = $ResourcesTab/HBoxContainer
@@ -22,7 +23,7 @@ var dResList = ["metal", "organic", "plasma", "fuel"]
 func _ready() -> void:
 	
 	#connecting all the signals
-	expeditionButton.connect("showExpedition", _on_show_expedition)
+	expeditionButton.connect("showExpeditionTab", _on_show_expedition)
 	hideExpedition.connect("hideExpedition", _on_hide_expedition)
 	GameState.resourcesChanged.connect(update_resources)
 	
@@ -31,6 +32,11 @@ func _ready() -> void:
 	createPlanet("Super mechant ville", preload("res://assets/planets/Planete2.png"))
 	createPlanet("Mignon planete", preload("res://assets/planets/Planete3.png"))
 	createPlanet("BHAAAAAA", preload("res://assets/planets/Planete4.png"))
+	createPlanet("testouille", preload("res://assets/planets/Planete4.png"))
+	createPlanet("BHAAAAAA", preload("res://assets/planets/Planete4.png"))
+	createPlanet("BHAAAAAA", preload("res://assets/planets/Planete4.png"))
+	createPlanet("BHAAAAAA", preload("res://assets/planets/Planete4.png"))
+
 
 	#Instanciates resources UI in top bar
 	createResource("metal")
@@ -49,10 +55,12 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-
 func createPlanet(name: String, texture:Texture2D):
+	print("creating planet : " + name)
 	var item = planetItemScene.instantiate()
 	item.setup(name, texture)
+	#on connect le signal maintenant pour gagner de la ressource sur le ready
+	item.planet_selected.connect(_on_planet_selected)
 	vbox.add_child(item)
 
 func createResource(type:String):
@@ -64,12 +72,31 @@ func createResource(type:String):
 func _on_show_expedition():
 	$ExpeditionTab/ScrollContainer.visible = true
 	$ExpeditionTab/HideExpedition.visible = true
+	$ExpeditionTab/ColorRect.visible = true
 	$ExpeditionTab/ExpeditionButton.visible = false
 
 func _on_hide_expedition():
 	$ExpeditionTab/ScrollContainer.visible = false
 	$ExpeditionTab/HideExpedition.visible = false
+	$ExpeditionTab/ColorRect.visible = false
+	$PlanetTab.visible = false
+	$BuildingsTab.visible = true
 	$ExpeditionTab/ExpeditionButton.visible = true
+	$ResourcesTab.visible = true
+	
+func _on_planet_selected(planetName: String):
+	print("Selected mission:", planetName)
+	showMissionTab(planetName)
+
+func showMissionTab(name: String):
+	print("showing mission : " + name)
+	$ResourcesTab.visible = false
+	$PlanetTab.visible = true
+	var planetMission = planetMissionScene.instantiate()
+	planetMission.setup(name, preload("res://assets/entity/monsters/1.png"))
+	$PlanetTab.add_child(planetMission)
+	var instanciatedChild = $PlanetTab.get_child(0)
+	instanciatedChild.visible = true
 
 #update UI
 func update_resources():
@@ -83,7 +110,8 @@ func update_resources():
 			var value = GameState.getResourceValue(type)
 			resourceDict[type].update_value(value, "label")
 
-#debug
+
+#DEBUG
 func _dOnResSelected(id):
 	dSelectedResource = dResList[id]
 	dMenuButton.text = dSelectedResource

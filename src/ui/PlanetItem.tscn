@@ -1,19 +1,31 @@
 [gd_scene format=3 uid="uid://bx0cm7v18pc7j"]
 
-[ext_resource type="Script" uid="uid://c5jrpr4inv7ej" path="res://scripts/ui/planetItem.gd" id="1_iwdx3"]
+[ext_resource type="Script" uid="uid://c5jrpr4inv7ej" path="res://src/ui/planetItem.gd" id="1_iwdx3"]
 
 [node name="PlanetItem" type="Control" unique_id=1075028405]
-custom_minimum_size = Vector2(500, 200)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 13.07
+offset_right = -18.984985
+offset_bottom = 13.070007
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
 script = ExtResource("1_iwdx3")
 
 [node name="BgPlanet" type="TextureRect" parent="." unique_id=113375995]
-layout_mode = 0
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_right = 150.0
+offset_bottom = 100.0
+grow_horizontal = 2
+expand_mode = 3
 stretch_mode = 5
 
 [node name="Description" type="Label" parent="BgPlanet" unique_id=719582292]
@@ -30,4 +42,3 @@ offset_top = -23.0
 offset_right = 15.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "test"

@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://dq8v6dwq20oay"]
+
+[ext_resource type="Script" uid="uid://ccs4ar0fuseud" path="res://src/ui/planetMission.gd" id="1_j6sxa"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_j6sxa"]
+font_color = Color(0, 0, 0, 1)
+
+[node name="PlanetMission" type="Control" unique_id=1448795901]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_j6sxa")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=398008657]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.62152386, 0.62152386, 0.6215238, 1)
+
+[node name="MonsterSprite" type="TextureRect" parent="." unique_id=61586005]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="PlanetName" type="Label" parent="." unique_id=440172917]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="." unique_id=1115562025]
+layout_mode = 0
+offset_left = 232.0
+offset_top = 191.0
+offset_right = 564.0
+offset_bottom = 266.0
+text = "C la planete et vous pouvez l'attaquer etc...
+
+Ressource : 1 Million d'euros etc"
+label_settings = SubResource("LabelSettings_j6sxa")
+
+[node name="AttackButton" type="Button" parent="." unique_id=1486365929]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -134.0
+offset_top = -31.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Lancer l'attaque"

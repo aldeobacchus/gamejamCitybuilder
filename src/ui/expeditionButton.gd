@@ -1,6 +1,6 @@
 extends Button
 
-signal showExpedition()
+signal showExpeditionTab()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -12,4 +12,4 @@ func _process(delta: float) -> void:
 	pass
 
 func _pressed() -> void:
-	emit_signal("showExpedition")
+	emit_signal("showExpeditionTab")

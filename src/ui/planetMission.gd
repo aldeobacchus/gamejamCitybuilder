@@ -1,13 +1,13 @@
-extends Node2D
+extends Control
 
-@export var buildingName: String = "SpatialPort"
+@onready var monsterSprite = $MonsterSprite
+@onready var planetName = $PlanetName
 
-var cost := {
-	"metal": 1500,
-	"organic": 0,
-	"plasma": 20,
-	"fuel": 200
-}
+func setup(name: String, texture:Texture2D):
+	await ready
+	planetName.text = name
+	monsterSprite.texture = texture
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -15,7 +15,4 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
-	
-func appliesEffect() -> void:
 	pass
