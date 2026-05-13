@@ -29,6 +29,10 @@ window/stretch/mode="canvas_items"
 
 build_buttons=""
 
+[gui]
+
+theme/custom_font="uid://llsgsvj6bl22"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
@@ -36,3 +40,4 @@ build_buttons=""
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+environment/defaults/default_clear_color=Color(0.6580772, 0.63201606, 0.5543376, 1)

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bt1vriigvn8jn"]
 
 [ext_resource type="Script" uid="uid://u123ngoogah4" path="res://src/ui/buildButtons.gd" id="1_1r1fh"]
+[ext_resource type="Theme" uid="uid://c2p75c8wo4ede" path="res://assets/ui/themes/globalTheme.tres" id="1_apyvs"]
 [ext_resource type="Script" uid="uid://j1gfy1agl3ar" path="res://src/ui/gui.gd" id="1_sy1ho"]
 [ext_resource type="PackedScene" uid="uid://uxsqkjejd0vh" path="res://src/entities/buildings/SpatialPort.tscn" id="2_sy1ho"]
 [ext_resource type="PackedScene" uid="uid://ce04lbpe3t8l8" path="res://src/entities/buildings/Barracks.tscn" id="3_40ujj"]
@@ -8,15 +9,27 @@
 [ext_resource type="Script" uid="uid://dj7tnlaa5b68q" path="res://src/ui/batLabel.gd" id="4_k3gx0"]
 [ext_resource type="Script" uid="uid://dg6oemd0sylaw" path="res://src/ui/expeditionButton.gd" id="6_40ujj"]
 [ext_resource type="Script" uid="uid://dk4nx0imq2ybw" path="res://src/ui/hideExpedition.gd" id="7_bu0gq"]
+[ext_resource type="StyleBox" uid="uid://vxtnk5vim7lq" path="res://assets/ui/themes/panelContainer.tres" id="10_apyvs"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_k3gx0"]
-font_size = 12
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3y2ti"]
+bg_color = Color(0.78039217, 0.78039217, 0.78039217, 0.34117648)
 
-[sub_resource type="LabelSettings" id="LabelSettings_3y2ti"]
-font_size = 12
+[sub_resource type="GDScript" id="GDScript_apyvs"]
+script/source = "extends Button
 
-[sub_resource type="LabelSettings" id="LabelSettings_apyvs"]
-font_size = 12
+signal hideBuildingInfo()
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+func _pressed() -> void:
+	emit_signal(\"hideBuildingInfo\")"
 
 [node name="Control" type="Control" unique_id=782448645]
 layout_mode = 3
@@ -25,6 +38,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_apyvs")
 script = ExtResource("1_sy1ho")
 
 [node name="BuildingsTab" type="Control" parent="." unique_id=955478603]
@@ -33,52 +47,63 @@ offset_left = 50.0
 offset_top = 600.0
 offset_right = 850.0
 offset_bottom = 700.0
+mouse_filter = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BuildingsTab" unique_id=386421781]
+[node name="PanelContainer" type="PanelContainer" parent="BuildingsTab" unique_id=34409714]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_3y2ti")
 
-[node name="SpatialPortContainer" type="VBoxContainer" parent="BuildingsTab/HBoxContainer" unique_id=2141623117]
+[node name="MarginContainer" type="MarginContainer" parent="BuildingsTab/PanelContainer" unique_id=1947646612]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BuildingsTab/PanelContainer/MarginContainer" unique_id=386421781]
+z_index = 1
 layout_mode = 2
 
-[node name="SpatialPort" type="Button" parent="BuildingsTab/HBoxContainer/SpatialPortContainer" unique_id=2014083297 groups=["build_buttons"]]
+[node name="SpatialPortContainer" type="VBoxContainer" parent="BuildingsTab/PanelContainer/MarginContainer/HBoxContainer" unique_id=2141623117]
+layout_mode = 2
+
+[node name="SpatialPort" type="Button" parent="BuildingsTab/PanelContainer/MarginContainer/HBoxContainer/SpatialPortContainer" unique_id=2014083297 groups=["build_buttons"]]
 layout_mode = 2
 text = "Spatial Port"
 script = ExtResource("1_1r1fh")
 building_scene = ExtResource("2_sy1ho")
 
-[node name="SPCost" type="Label" parent="BuildingsTab/HBoxContainer/SpatialPortContainer" unique_id=661966171]
+[node name="SPCost" type="Label" parent="BuildingsTab/PanelContainer/MarginContainer/HBoxContainer/SpatialPortContainer" unique_id=661966171]
 layout_mode = 2
-label_settings = SubResource("LabelSettings_k3gx0")
+text = "test"
 script = ExtResource("4_k3gx0")
 
-[node name="ArmureriePortContainer2" type="VBoxContainer" parent="BuildingsTab/HBoxContainer" unique_id=1166780577]
+[node name="ArmureriePortContainer2" type="VBoxContainer" parent="BuildingsTab/PanelContainer/MarginContainer/HBoxContainer" unique_id=1166780577]
 layout_mode = 2
 
-[node name="Armurerie" type="Button" parent="BuildingsTab/HBoxContainer/ArmureriePortContainer2" unique_id=1496003378 groups=["build_buttons"]]
+[node name="Armurerie" type="Button" parent="BuildingsTab/PanelContainer/MarginContainer/HBoxContainer/ArmureriePortContainer2" unique_id=1496003378 groups=["build_buttons"]]
 layout_mode = 2
 text = "Armurerie"
 script = ExtResource("1_1r1fh")
 building_scene = ExtResource("4_bu0gq")
 
-[node name="Acost" type="Label" parent="BuildingsTab/HBoxContainer/ArmureriePortContainer2" unique_id=1817367010]
+[node name="Acost" type="Label" parent="BuildingsTab/PanelContainer/MarginContainer/HBoxContainer/ArmureriePortContainer2" unique_id=1817367010]
 layout_mode = 2
-label_settings = SubResource("LabelSettings_3y2ti")
 script = ExtResource("4_k3gx0")
 
-[node name="BarracksContainer" type="VBoxContainer" parent="BuildingsTab/HBoxContainer" unique_id=1860162694]
+[node name="BarracksContainer" type="VBoxContainer" parent="BuildingsTab/PanelContainer/MarginContainer/HBoxContainer" unique_id=1860162694]
 layout_mode = 2
 
-[node name="Barracks" type="Button" parent="BuildingsTab/HBoxContainer/BarracksContainer" unique_id=1383064812 groups=["build_buttons"]]
+[node name="Barracks" type="Button" parent="BuildingsTab/PanelContainer/MarginContainer/HBoxContainer/BarracksContainer" unique_id=1383064812 groups=["build_buttons"]]
 layout_mode = 2
 text = "Barracks"
 script = ExtResource("1_1r1fh")
 building_scene = ExtResource("3_40ujj")
 
-[node name="BCost" type="Label" parent="BuildingsTab/HBoxContainer/BarracksContainer" unique_id=1821556785]
+[node name="BCost" type="Label" parent="BuildingsTab/PanelContainer/MarginContainer/HBoxContainer/BarracksContainer" unique_id=1821556785]
 layout_mode = 2
-label_settings = SubResource("LabelSettings_apyvs")
 script = ExtResource("4_k3gx0")
 
 [node name="ExpeditionTab" type="Control" parent="." unique_id=965628691]
@@ -88,13 +113,6 @@ offset_left = 900.0
 offset_top = 25.0
 offset_right = 1229.0
 offset_bottom = 675.0
-
-[node name="ColorRect" type="ColorRect" parent="ExpeditionTab" unique_id=743024148]
-visible = false
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color(0.5330367, 0.5330367, 0.5330366, 1)
 
 [node name="ExpeditionButton" type="Button" parent="ExpeditionTab" unique_id=1408823780]
 layout_mode = 1
@@ -112,28 +130,36 @@ script = ExtResource("6_40ujj")
 
 [node name="HideExpedition" type="Button" parent="ExpeditionTab" unique_id=538650103]
 visible = false
-z_index = 2
+z_index = 3
 layout_mode = 0
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = 6.0
-offset_right = 36.0
+offset_left = 340.0
+offset_right = 357.0
 offset_bottom = 31.0
 grow_horizontal = 0
 pivot_offset = Vector2(-10, -10)
+size_flags_horizontal = 8
+size_flags_vertical = 0
 text = "x"
 script = ExtResource("7_bu0gq")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="ExpeditionTab" unique_id=1771158797]
+[node name="PanelContainer" type="PanelContainer" parent="ExpeditionTab" unique_id=1312026267]
 visible = false
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = ExtResource("10_apyvs")
+
+[node name="MarginContainer" type="MarginContainer" parent="ExpeditionTab/PanelContainer" unique_id=2061964573]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ExpeditionTab/PanelContainer/MarginContainer" unique_id=1771158797]
+layout_mode = 2
 horizontal_scroll_mode = 0
 
-[node name="ExpeditionsList" type="VBoxContainer" parent="ExpeditionTab/ScrollContainer" unique_id=523875527]
+[node name="ExpeditionsList" type="VBoxContainer" parent="ExpeditionTab/PanelContainer/MarginContainer/ScrollContainer" unique_id=523875527]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -158,10 +184,76 @@ theme_override_constants/separation = 40
 [node name="PlanetTab" type="Control" parent="." unique_id=471681318]
 visible = false
 anchors_preset = 0
-offset_left = 50.0
+offset_left = 196.0
 offset_top = 25.0
-offset_right = 850.0
+offset_right = 885.0
 offset_bottom = 675.0
+
+[node name="PanelContainer" type="PanelContainer" parent="PlanetTab" unique_id=1923386742]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("10_apyvs")
+
+[node name="MarginContainer" type="MarginContainer" parent="PlanetTab/PanelContainer" unique_id=1913623678]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="BuildingInfoContainer" type="Control" parent="." unique_id=1161267164]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -250.0
+offset_right = 400.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="BuildingInfoContainer" unique_id=1160401326]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("10_apyvs")
+
+[node name="MarginContainer" type="MarginContainer" parent="BuildingInfoContainer/PanelContainer" unique_id=804464569]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="MarginContainer" type="MarginContainer" parent="BuildingInfoContainer" unique_id=20705413]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="ExitButton" type="Button" parent="BuildingInfoContainer/MarginContainer" unique_id=538417198]
+z_index = 1
+layout_mode = 2
+text = "x"
+script = SubResource("GDScript_apyvs")
 
 [node name="DebugUI" type="Control" parent="." unique_id=373687633]
 visible = false
@@ -193,5 +285,6 @@ offset_right = 34.0
 offset_bottom = 86.0
 text = "- 100"
 
+[connection signal="pressed" from="BuildingInfoContainer/MarginContainer/ExitButton" to="." method="hideBuildingInfo"]
 [connection signal="pressed" from="DebugUI/Add" to="." method="_dOnAddTen"]
 [connection signal="pressed" from="DebugUI/Remove" to="." method="_dOnRemoveTen"]

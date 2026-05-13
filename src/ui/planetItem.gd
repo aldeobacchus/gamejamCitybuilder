@@ -4,13 +4,15 @@ signal planet_selected(planetName)
 
 @onready var background = $BgPlanet
 @onready var description = $BgPlanet/Description
-var planetName: String
+@onready var planetName: String
+@onready var monsterImg : Texture2D
 
-func setup(name: String, texture:Texture2D):
+func setup(name: String, bg:Texture2D, img:Texture2D):
 	await ready
 	description.text = name
 	planetName = name
-	background.texture = texture
+	background.texture = bg
+	monsterImg = img
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -23,4 +25,4 @@ func _process(delta: float) -> void:
 
 func _gui_input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		emit_signal("planet_selected", planetName)
+		planet_selected.emit(self)

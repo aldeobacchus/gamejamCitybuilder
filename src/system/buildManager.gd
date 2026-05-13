@@ -2,10 +2,13 @@ extends Node2D
 
 #tileMap
 @export var tileMap: TileMapLayer
+@export var starting_building_scene: PackedScene
+
+@onready var gui = $"../../CanvasLayer/GUI"
+@onready var buildingsNode = $"../Buildings"
 
 #building instance
 var selected_building_scene: PackedScene = null
-
 #ghost building for placing
 var temp_build_instance: Node2D = null
 var is_placing := false
@@ -16,6 +19,7 @@ func _ready() -> void:
 	for button in get_tree().get_nodes_in_group("build_buttons"):
 		if button.has_signal("building_selected"):
 			button.connect("building_selected", _on_building_selected)
+	spawn_starting_building()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -44,11 +48,15 @@ func getSnappedPosition(pos):
 	return tileMap.to_global(snapped_local)
 
 func enter_build_mode():
-	print(tileMap)
 	tileMap.modulate = Color(1, 0, 0, 1)
 
 func exit_build_mode():
 	tileMap.modulate = Color(1.0, 1.0, 1.0, 0.0)
+
+#setup
+func spawn_starting_building():
+	selected_building_scene = starting_building_scene
+	place_building(get_viewport().get_visible_rect().size / 2)
 
 #building mode
 func _on_building_selected(scene: PackedScene):
@@ -76,21 +84,35 @@ func set_preview_visual(node):
 			child.modulate.a = 0.5
 
 func place_building(position: Vector2):
+	
 	if selected_building_scene == null:
 		return
 	
 	#paying the cost
-	GameState.pay(temp_build_instance.cost)
+	if temp_build_instance:
+		GameState.pay(temp_build_instance.cost)
 	
 	var building = selected_building_scene.instantiate()		
 	building.global_position = getSnappedPosition(position)
-	get_parent().get_node("Buildings").add_child(building)
+	
+	#registering the building (adding to Buildings Node + connect signal)
+	register_building(building)
+	
+	#to cancel triggering of click when pausing
+	await get_tree().process_frame
+	building.setup()
 	
 	#cancelling preview
-	temp_build_instance.queue_free()
+	if temp_build_instance:
+		temp_build_instance.queue_free()
 	temp_build_instance = null
-	
-	building.appliesEffect()
-	
+		
 	is_placing = false
 	selected_building_scene = null
+
+func register_building(building):
+	building.clicked.connect(_on_building_clicked)
+	buildingsNode.add_child(building)
+	
+func _on_building_clicked(building):
+	gui.showBuildingInfo(building)

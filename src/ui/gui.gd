@@ -1,11 +1,12 @@
 extends Control
 
 #EXPEDITION
-@onready var vbox = $ExpeditionTab/ScrollContainer/ExpeditionsList
+@onready var vbox = $ExpeditionTab/PanelContainer/MarginContainer/ScrollContainer/ExpeditionsList
 @onready var expeditionButton = $ExpeditionTab/ExpeditionButton
 @onready var hideExpedition = $ExpeditionTab/HideExpedition
 var planetItemScene = preload("res://src/ui/PlanetItem.tscn")
 var planetMissionScene = preload("res://src/ui/PlanetMission.tscn")
+var buildingInfoScene = preload("res://src/ui/BuildingInfo.tscn")
 
 #RESOURCES
 @onready var hboxRes = $ResourcesTab/HBoxContainer
@@ -25,17 +26,18 @@ func _ready() -> void:
 	#connecting all the signals
 	expeditionButton.connect("showExpeditionTab", _on_show_expedition)
 	hideExpedition.connect("hideExpedition", _on_hide_expedition)
+	
 	GameState.resourcesChanged.connect(update_resources)
 	
 	#Instanciate planets in expedition tab
-	createPlanet("Zborg",preload("res://assets/planets/Planete1.png"))
-	createPlanet("Super mechant ville", preload("res://assets/planets/Planete2.png"))
-	createPlanet("Mignon planete", preload("res://assets/planets/Planete3.png"))
-	createPlanet("BHAAAAAA", preload("res://assets/planets/Planete4.png"))
-	createPlanet("testouille", preload("res://assets/planets/Planete4.png"))
-	createPlanet("BHAAAAAA", preload("res://assets/planets/Planete4.png"))
-	createPlanet("BHAAAAAA", preload("res://assets/planets/Planete4.png"))
-	createPlanet("BHAAAAAA", preload("res://assets/planets/Planete4.png"))
+	createPlanet("Zborg",preload("res://assets/planets/Planete1.png"), preload("res://assets/entity/monsters/monstre_metal.png"))
+	createPlanet("Super mechant ville", preload("res://assets/planets/Planete2.png"), preload("res://assets/entity/monsters/monstre_fuel.png"))
+	createPlanet("Mignon planete", preload("res://assets/planets/Planete3.png"), preload("res://assets/entity/monsters/monstre_organic.png"))
+	createPlanet("BHAAAAAA", preload("res://assets/planets/Planete4.png"), preload("res://assets/entity/monsters/monstre_sable.png"))
+	createPlanet("testouille", preload("res://assets/planets/Planete4.png"), preload("res://assets/entity/monsters/monstre_metal.png"))
+	createPlanet("BHAAAAAA", preload("res://assets/planets/Planete4.png"), preload("res://assets/entity/monsters/monstre_fuel.png"))
+	createPlanet("BHAAAAAA", preload("res://assets/planets/Planete4.png"), preload("res://assets/entity/monsters/monstre_organic.png"))
+	createPlanet("BHAAAAAA", preload("res://assets/planets/Planete4.png"), preload("res://assets/entity/monsters/monstre_fuel.png"))
 
 
 	#Instanciates resources UI in top bar
@@ -55,10 +57,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func createPlanet(name: String, texture:Texture2D):
-	print("creating planet : " + name)
+func createPlanet(name: String, texture:Texture2D, monsterImg: Texture2D):
 	var item = planetItemScene.instantiate()
-	item.setup(name, texture)
+	item.setup(name, texture, monsterImg)
 	#on connect le signal maintenant pour gagner de la ressource sur le ready
 	item.planet_selected.connect(_on_planet_selected)
 	vbox.add_child(item)
@@ -70,32 +71,31 @@ func createResource(type:String):
 	resourceDict[type] = res
 
 func _on_show_expedition():
-	$ExpeditionTab/ScrollContainer.visible = true
-	$ExpeditionTab/HideExpedition.visible = true
-	$ExpeditionTab/ColorRect.visible = true
+	$ExpeditionTab/PanelContainer.visible = true
+	$ExpeditionTab/HideExpedition.visible= true
 	$ExpeditionTab/ExpeditionButton.visible = false
 
 func _on_hide_expedition():
-	$ExpeditionTab/ScrollContainer.visible = false
+	$ExpeditionTab/PanelContainer.visible = false
 	$ExpeditionTab/HideExpedition.visible = false
-	$ExpeditionTab/ColorRect.visible = false
 	$PlanetTab.visible = false
 	$BuildingsTab.visible = true
 	$ExpeditionTab/ExpeditionButton.visible = true
 	$ResourcesTab.visible = true
 	
-func _on_planet_selected(planetName: String):
-	print("Selected mission:", planetName)
-	showMissionTab(planetName)
 
-func showMissionTab(name: String):
+func _on_planet_selected(planet: Control):
+	#clean child of Planet Tab
+	for child in $PlanetTab/PanelContainer/MarginContainer.get_children():
+		child.queue_free()
 	print("showing mission : " + name)
 	$ResourcesTab.visible = false
+	$BuildingsTab.visible = false
 	$PlanetTab.visible = true
 	var planetMission = planetMissionScene.instantiate()
-	planetMission.setup(name, preload("res://assets/entity/monsters/1.png"))
-	$PlanetTab.add_child(planetMission)
-	var instanciatedChild = $PlanetTab.get_child(0)
+	planetMission.setup(planet.planetName, planet.monsterImg)
+	$PlanetTab/PanelContainer/MarginContainer.add_child(planetMission)
+	var instanciatedChild = $PlanetTab/PanelContainer/MarginContainer.get_child(0)
 	instanciatedChild.visible = true
 
 #update UI
@@ -110,6 +110,23 @@ func update_resources():
 			var value = GameState.getResourceValue(type)
 			resourceDict[type].update_value(value, "label")
 
+func showBuildingInfo(building):
+	$BuildingInfoContainer.visible = true
+	$BuildingsTab.visible = false
+	$ExpeditionTab.visible = false
+	for child in $BuildingInfoContainer/PanelContainer/MarginContainer.get_children():
+		child.queue_free()
+	print("showing building : " + building.buildingName)
+	var buildingInfoInstance = buildingInfoScene.instantiate()
+	buildingInfoInstance.setup(building.buildingName, building.buildingDescription)
+	$BuildingInfoContainer/PanelContainer/MarginContainer.add_child(buildingInfoInstance)
+	
+func hideBuildingInfo():
+	$BuildingInfoContainer.visible = false
+	for child in $BuildingInfoContainer/PanelContainer/MarginContainer.get_children():
+		child.queue_free()
+	$ExpeditionTab.visible = true
+	$BuildingsTab.visible = true
 
 #DEBUG
 func _dOnResSelected(id):

@@ -1,9 +1,25 @@
 [gd_scene format=3 uid="uid://ct7koco0as1wb"]
 
-[ext_resource type="Texture2D" uid="uid://bq8onlmmco2p1" path="res://assets/buildings/main.png" id="1_ewhf3"]
+[ext_resource type="Script" uid="uid://b2erfpm2ndlfj" path="res://src/entities/buildings/main_building.gd" id="1_ee2jx"]
+[ext_resource type="Texture2D" uid="uid://btnpgqgrx8ble" path="res://assets/buildings/barracks2.png" id="1_fco2o"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_ee2jx"]
+points = PackedVector2Array(-67, 127.25, 164, 3.25, 138, -88.75, 44, -120.75, -33, -108.75, -196, 66.25)
 
 [node name="MainBuilding" type="Node2D" unique_id=1860023803]
+script = ExtResource("1_ee2jx")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=160207320]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_ewhf3")
+position = Vector2(60, -79)
+rotation = 0.034906585
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("1_fco2o")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=156377075]
+position = Vector2(60, -79)
+rotation = 0.034906585
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=404035316]
+position = Vector2(14, 13.75)
+rotation = 0.034906585
+shape = SubResource("ConvexPolygonShape2D_ee2jx")

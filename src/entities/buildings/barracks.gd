@@ -1,6 +1,6 @@
-extends Node2D
+extends Building
 
-@export var buildingName: String = "Barracks"
+@export var capacityBonus : int = 5
 
 var cost := {
 	"metal": 500,
@@ -9,14 +9,19 @@ var cost := {
 	"fuel": 0
 }
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
+#to call when the building is placed
+func setup():
+	print("intit building")
+	isPlaced = true
+	buildingName = "Barracks"
+	appliesEffect()
+
+func onClicked():
+	print("Barracksssss")
+
 func appliesEffect() -> void:
-	GameState.addResource("soldierCapacity", 5)
+	GameState.addResource("soldierCapacity", capacityBonus)

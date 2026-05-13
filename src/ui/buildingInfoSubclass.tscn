@@ -1,0 +1,125 @@
+[gd_scene format=3 uid="uid://cxcs42baaluvw"]
+
+[ext_resource type="Theme" uid="uid://c2p75c8wo4ede" path="res://assets/ui/themes/globalTheme.tres" id="1_cs8e7"]
+[ext_resource type="Script" uid="uid://clbm8f6ofx4ax" path="res://src/ui/buildingInfoSubclass.gd" id="2_usd6p"]
+[ext_resource type="Texture2D" uid="uid://bdlqwemnercjj" path="res://assets/icon/recruit.png" id="3_bksmn"]
+[ext_resource type="FontFile" uid="uid://dutjace3asjqq" path="res://assets/ui/font/vg5000-master/fonts/webfonts/VG5000-Regular_web.woff" id="3_dp1xq"]
+[ext_resource type="Texture2D" uid="uid://b4qqo1fvaauap" path="res://assets/icon/metal.png" id="4_dp1xq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cs8e7"]
+bg_color = Color(0.72196436, 0.6748563, 0.6073663, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_y8kqk"]
+font = ExtResource("3_dp1xq")
+font_size = 25
+font_color = Color(0.096204735, 0.09620475, 0.096204735, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_bksmn"]
+font = ExtResource("3_dp1xq")
+font_size = 20
+font_color = Color(0.14333999, 0.14333999, 0.14333999, 1)
+
+[node name="BuildingInfoSubclass" type="Control" unique_id=1718551486]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_cs8e7")
+script = ExtResource("2_usd6p")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1619909217]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cs8e7")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=494108122]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1838015495]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="InfoTitle" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=407092175]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_y8kqk")
+
+[node name="TroopBuilderContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1286463439]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TroopBuilderContainer" unique_id=1666792170]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TroopBuilderContainer/ScrollContainer" unique_id=688905191]
+layout_mode = 2
+
+[node name="Soldier1" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TroopBuilderContainer/ScrollContainer/VBoxContainer" unique_id=919085470]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/TroopBuilderContainer/ScrollContainer/VBoxContainer/Soldier1" unique_id=132612633]
+layout_mode = 2
+icon = ExtResource("3_bksmn")
+flat = true
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TroopBuilderContainer/ScrollContainer/VBoxContainer/Soldier1" unique_id=1246328330]
+layout_mode = 2
+text = "Soldat cool"
+label_settings = SubResource("LabelSettings_bksmn")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TroopBuilderContainer/ScrollContainer/VBoxContainer/Soldier1" unique_id=1810792998]
+visible = false
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/TroopBuilderContainer/ScrollContainer/VBoxContainer/Soldier1/HBoxContainer" unique_id=1090110738]
+layout_mode = 2
+texture = ExtResource("4_dp1xq")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TroopBuilderContainer/ScrollContainer/VBoxContainer/Soldier1/HBoxContainer" unique_id=442128662]
+layout_mode = 2
+text = "50"
+
+[node name="Soldier2" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TroopBuilderContainer/ScrollContainer/VBoxContainer" unique_id=886916979]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/TroopBuilderContainer/ScrollContainer/VBoxContainer/Soldier2" unique_id=1646901224]
+layout_mode = 2
+icon = ExtResource("3_bksmn")
+flat = true
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TroopBuilderContainer/ScrollContainer/VBoxContainer/Soldier2" unique_id=66535135]
+layout_mode = 2
+text = "Soldate trop forte"
+label_settings = SubResource("LabelSettings_bksmn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TroopBuilderContainer/ScrollContainer/VBoxContainer/Soldier2" unique_id=306467789]
+visible = false
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/TroopBuilderContainer/ScrollContainer/VBoxContainer/Soldier2/VBoxContainer" unique_id=441541608]
+layout_mode = 2
+texture = ExtResource("4_dp1xq")
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TroopBuilderContainer/ScrollContainer/VBoxContainer/Soldier2/VBoxContainer" unique_id=2008195052]
+layout_mode = 2
+text = "50"

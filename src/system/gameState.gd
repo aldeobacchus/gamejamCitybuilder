@@ -28,7 +28,6 @@ func getCost(type:String) -> Dictionary:
 func addResource(type:String, amount:int):
 	var current = resources.get(type)
 	resources.set(type, current + amount)
-	print(str(current) + str(amount))
 	emit_signal("resourcesChanged")
 
 #removing resources to game state

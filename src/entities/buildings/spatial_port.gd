@@ -1,6 +1,8 @@
 extends Node2D
 
 @export var buildingName: String = "SpatialPort"
+@export var level: int = 1
+var isPlaced : bool = false
 
 var cost := {
 	"metal": 1500,

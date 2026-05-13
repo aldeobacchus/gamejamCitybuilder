@@ -30,5 +30,5 @@ func updatePayState():
 		modulate = Color(1, 1, 1, 1)   # normal
 	else:
 		disabled = true
-		modulate = Color(0.5, 0.5, 0.5, 1)   # grisé
+		modulate = Color(0.8, 0.8, 0.8, 1)   # grisé
 	

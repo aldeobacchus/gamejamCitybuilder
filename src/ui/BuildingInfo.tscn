@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://bes410owkhmjo"]
+
+[ext_resource type="Theme" uid="uid://c2p75c8wo4ede" path="res://assets/ui/themes/globalTheme.tres" id="1_7fihs"]
+[ext_resource type="Script" uid="uid://dhvwrblvm8vi2" path="res://src/ui/buildingInfo.gd" id="1_tj4dt"]
+[ext_resource type="FontFile" uid="uid://dutjace3asjqq" path="res://assets/ui/font/vg5000-master/fonts/webfonts/VG5000-Regular_web.woff" id="3_ggnue"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_34joy"]
+font = ExtResource("3_ggnue")
+font_size = 35
+font_color = Color(0.15487596, 0.154876, 0.15487596, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_tj4dt"]
+font_color = Color(0.13464907, 0.1346491, 0.1346491, 1)
+
+[node name="BuildingInfo" type="Control" unique_id=778790272]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_7fihs")
+script = ExtResource("1_tj4dt")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1162669834]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 25
+
+[node name="BuildingName" type="Label" parent="VBoxContainer" unique_id=754516029]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_34joy")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=2130165407]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 25
+
+[node name="BuildingDesc" type="Label" parent="VBoxContainer/VBoxContainer" unique_id=348432561]
+layout_mode = 2
+size_flags_vertical = 6
+label_settings = SubResource("LabelSettings_tj4dt")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/VBoxContainer" unique_id=1094604111]
+custom_minimum_size = Vector2(0, 375)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10

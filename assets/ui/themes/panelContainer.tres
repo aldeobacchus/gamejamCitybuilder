@@ -1,0 +1,8 @@
+[gd_resource type="StyleBoxFlat" format=3 uid="uid://vxtnk5vim7lq"]
+
+[resource]
+bg_color = Color(0.86275345, 0.8466511, 0.8002466, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10

@@ -23,6 +23,7 @@ script = ExtResource("1_k2fmo")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=849016846]
 
 [node name="GUI" parent="CanvasLayer" unique_id=782448645 instance=ExtResource("3_l3cfh")]
+mouse_filter = 1
 
 [node name="World" type="Node2D" parent="." unique_id=1759400283]
 
@@ -38,10 +39,12 @@ script = ExtResource("5_jqarl")
 tilemap = NodePath("../TileMapLayer")
 
 [node name="Buildings" type="Node2D" parent="World" unique_id=774979377]
-
-[node name="MainBuilding" parent="World/Buildings" unique_id=1860023803 instance=ExtResource("3_6q06x")]
-position = Vector2(601, 274)
+z_index = 1
+y_sort_enabled = true
 
 [node name="BuildManager" type="Node2D" parent="World" unique_id=1460419678 node_paths=PackedStringArray("tileMap")]
+z_index = 1
+y_sort_enabled = true
 script = ExtResource("5_ow5a4")
 tileMap = NodePath("../TileMapLayer")
+starting_building_scene = ExtResource("3_6q06x")
